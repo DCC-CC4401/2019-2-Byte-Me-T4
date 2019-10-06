@@ -15,13 +15,10 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-from tusker import views as nombre_views
+from tuskerapp import views as nombre_views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^admin/', admin.site.urls),
     url(r'^hi/', nombre_views.hello_world, name='hi'),
+    url()
 ]
-
-
-

@@ -25,7 +25,7 @@ SECRET_KEY = '(u=@1wez()8mjf-a*_gtodjb@kwr^7+4qk-5(7c11&!j)qw9&g'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost']
 
 
 # Application definition
@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'tusker',
+    'tuskerapp',
 ]
 
 MIDDLEWARE = [
@@ -55,7 +55,7 @@ ROOT_URLCONF = 'Tusker.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'tuskerapp/templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
