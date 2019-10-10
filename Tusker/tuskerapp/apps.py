@@ -1,5 +1,5 @@
 from django.apps import AppConfig
 
 
-class TuskerConfig(AppConfig):
+class TuskerappConfig(AppConfig):
     name = 'tuskerapp'

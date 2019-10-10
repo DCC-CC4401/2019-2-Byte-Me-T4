@@ -1,6 +1,6 @@
 from django.shortcuts import render
-from django.http import HttpResponse
 
-def hello_world(request):
-        text = "<h1>EXITOOO</h1>"
-        return HttpResponse(text)
+# Create your views here.
+def userProfile(request):
+    cssbootstrap = 'css/bootstrap.min.css'
+    return render(request,'userProfile')
