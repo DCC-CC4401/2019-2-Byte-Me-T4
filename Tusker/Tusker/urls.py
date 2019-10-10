@@ -22,8 +22,9 @@ from Tusker import settings
 from tuskerapp import views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('prueba/', views.userProfile),
+    path('admin/', admin.site.urls, name="admin"),
+    path('prueba/', views.userProfile, name="prueba"),
+    path('landingPage/', views.landingPage, name="landingPage")
 ]
 
 # urlpatterns += staticfiles_urlpatterns()
