@@ -16,13 +16,14 @@ Including another URLconf
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
-from django.urls import path
+from django.urls import path, include
 
 from Tusker import settings
 from tuskerapp import views
 
 urlpatterns = [
     path('admin/', admin.site.urls, name="admin"),
+    path('accounts/', include('django.contrib.auth.urls')),
     path('prueba/', views.userProfile, name="prueba"),
     path('landingPage/', views.landingPage, name="landingPage")
 ]
