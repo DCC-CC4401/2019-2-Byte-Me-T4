@@ -10,3 +10,9 @@ def userProfile(request):
 def landingPage(request):
     cssbootstrap = 'css/bootstrap.min.css'
     return render(request, 'landingPage')
+
+###### hello i implemented dis
+def landingPageNonAuth(request):
+    cssbootstrap = 'css/bootstrap.min.css'
+    return render(request, 'login')
+####################

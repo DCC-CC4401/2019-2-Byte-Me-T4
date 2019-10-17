@@ -25,7 +25,8 @@ urlpatterns = [
     path('admin/', admin.site.urls, name="admin"),
     path('accounts/', include('django.contrib.auth.urls')),
     path('prueba/', views.userProfile, name="prueba"),
-    path('landingPage/', views.landingPage, name="landingPage")
+    path('landingPage/', views.landingPage, name="landingPage"),
+    path('login/', views.landingPageNonAuth, name="login")
 ]
 
 # urlpatterns += staticfiles_urlpatterns()
