@@ -1,7 +1,8 @@
-import logging
 from django.contrib.auth import login, authenticate
-from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect
+from .forms import SignUpForm, SignInForm
+from .forms import UserCreationForm
+from django.contrib import messages
 
 # Create your views here.
 def userProfile(request):
@@ -13,16 +14,25 @@ def landingPage(request):
 def index(request):
     if request.method == "POST":
         if request.POST.get('submit') == 'sign_in':
-            form = UserCreationForm(request.POST)
-            #if form.is_valid():
-            form.save()
-            email = form.cleaned_data.get('email')
-            #logging.info(email)
-            raw_password = form.cleaned_data.get('password')
-            user = authenticate(email=email, password=raw_password)
-            login(request, user)
-            return redirect('userProfile')
+            form = SignInForm(request.POST)
+            if form.is_valid():
+                email = form.cleaned_data.get('email')
+                raw_password = form.cleaned_data.get('password')
+                user = authenticate(email=email, password=raw_password)
+                if user is None:
+                    messages.error(request, 'email or password not correct')
+                else:
+                    login(request, user)
+                    return redirect('http://127.0.0.1:8000/landingPage')
         elif request.POST.get('submit') == 'sign_up':
-            return
-    else:
-        return render(request, 'index')
+            form = SignUpForm(request.POST)
+            if form.is_valid():
+                user = form.save()
+                #email = form.cleaned_data.get('email')
+                #raw_password = form.cleaned_data.get('password')
+                #user = authenticate(email=email, password=raw_password)
+                login(request, user)
+                return redirect('http://127.0.0.1:8000/landingPage')
+    signin_form = SignInForm()
+    signup_form = SignUpForm()
+    return render(request, 'index', context={"upform": signup_form, "inform": signin_form})
