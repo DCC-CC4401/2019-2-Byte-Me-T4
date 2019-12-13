@@ -25,7 +25,7 @@ SECRET_KEY = 'e=m)zb8j-jo=za+=92h-j8xez4b(%5^+s-pd80e26k4!#)cks&'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -124,4 +124,4 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 STATIC_ROOT = os.path.join(BASE_DIR, 'tuskerapp/static')
 
-AUTH_USER_MODEL = 'tuskerapp.CustomUser'
+AUTHENTICATION_BACKENDS = ( 'django.contrib.auth.backends.ModelBackend',)
