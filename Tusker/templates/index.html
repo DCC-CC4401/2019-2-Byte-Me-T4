@@ -16,11 +16,7 @@
 		<form method="POST">
             {% csrf_token %}
 			<h1>Crear Cuenta</h1>
-            {{ upform }}
-            <!--<input type="text" placeholder="Nombre" />
-			<input type="text" placeholder="Apellido" />
-			<input type="email" placeholder="Email" />
-			<input type="password" placeholder="Contraseña" />-->
+            {{ up_form }}
 			<button type="submit" name='submit' value='sign_up'>Crear cuenta</button>
 		</form>
 	</div>
@@ -28,12 +24,11 @@
 		<form  method="POST">
             {% csrf_token %}
 			<h1>Iniciar Sesión</h1>
-            {{ inform }}
-			<!--<input id="email" type="email" name="email" placeholder="Email" />
-			<input id="password" type="password" name="password" placeholder="Contraseña" />-->
+            {{ in_form }}
 			<a href="#">Olvidaste tu contraseña?</a>
 			<button type="submit" name='submit' value='sign_in'>Ingresar</button>
-               {% for message in messages %}
+            <!-- MESSAGES-->
+            {% for message in messages %}
 
                     <div class="alert alert-success">
                         <a class="close" href="#" data-dismiss="alert">×</a>
@@ -52,9 +47,11 @@
 				<button class="ghost" id="signIn">Volver</button>
 			</div>
 			<div class="overlay-panel overlay-right">
+                <img src="{% static 'prueba/img/logo.png' %}" class="img-fluid" style="width: 40%">
 				<h1>Bienvenido a Tusker!</h1>
-				<p>No se que poner acá. Quizás aquí es donde va el objetivo de negocio. Porfa ponganme un 70.</p>
-				<button class="ghost" id="signUp">Registrarse</button>
+				<p>Tusker es una aplicación de precisión que te ayudará a manejar mejor tu tiempo.
+                    Puedes registrar y evaluar tus actividades, comparar con amigos, y mucho más</p>
+				<button class="ghost" id="signUp">Únete :D</button>
 			</div>
 		</div>
 	</div>

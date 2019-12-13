@@ -1,0 +1,55 @@
+{%  load static  %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Logout</title>
+    <link rel='stylesheet' href="{% static 'index/css/all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'index/css/style.css' %}">
+    <style>
+        .shellow-panel {
+            position: absolute;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            padding: 0 40px;
+            text-align: center;
+            top: 0;
+            height: 100%;
+            width: 100%;
+            transform: translateX(0);
+            transition: transform 0.6s ease-in-out;
+            background: rgb(44, 44, 44);
+            color: #ffffff;
+        }
+        .shellow-button {
+            border-radius: 5px;
+            border: 1px solid #e51c23;
+            background:#e51c23 -webkit-gradient(linear, left top, left bottom, from(#e93e44), to(#e51c23));
+            /*background-color: #e51c23;*/
+            color: #FFFFFF;
+            font-size: 12px;
+            font-weight: bold;
+            padding: 12px 45px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: transform 80ms ease-in;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="shellow-panel overflow-auto">
+            <div class="">
+                <img src="{% static 'prueba/img/logo.png' %}" class="img-fluid" style="width: 20%">
+                <h1> Tu sesión ha terminado</h1>
+                <p> Ve a la página de inicio para iniciar sesión</p>
+                <a class="shellow-button"  href="{% url 'index.html' %}">Inicio</a>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

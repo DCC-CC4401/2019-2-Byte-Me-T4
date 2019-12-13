@@ -25,7 +25,8 @@ urlpatterns = [
     path('accounts/', include('django.contrib.auth.urls')),
     path('prueba/', views.user_profile, name="prueba"),
     path('landingPage/', views.landing_page, name="landingPage.html"),
-    path('index/', views.index, name="index.html")
+    path('index/', views.index, name="index.html"),
+    path('logout', views.logout_view, name= 'logout.html')
 ]
 
 # urlpatterns += staticfiles_urlpatterns()

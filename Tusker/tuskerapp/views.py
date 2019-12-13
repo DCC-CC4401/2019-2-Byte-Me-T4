@@ -1,16 +1,19 @@
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, authenticate, logout
 from django.shortcuts import render, redirect
 from .forms import SignUpForm, SignInForm
 from django.contrib import messages
-# from django.contrib.auth.decorators import login_required
 
+
+def logout_view(request):
+    logout(request)
+    return render(request, 'logout.html')
 
 def user_profile(request):
     return render(request, 'userProfile.html')
 
 
 def landing_page(request):
-    return render(request, 'landingPage.html')
+    return render(request, 'landingPage.html', context={"user_name": request.user.first_name})
 
 
 def index(request):
@@ -22,14 +25,15 @@ def index(request):
             if form.is_valid():
                 email = form.cleaned_data.get('email')
                 raw_password = form.cleaned_data.get('password')
-                print("email " + email + "pass " + raw_password)
+                #print("email " + email + "pass " + raw_password)
                 user = authenticate(username=email, password=raw_password)
-                print(user)
+                #print(user)
                 if user is None:
                     messages.error(request, 'email or password not correct')
                 else:
                     login(request, user)
                     messages.success(request, f'Inicio de Sesión Exitoso para {email}!')
+                    #print(user.first_name)
                     return redirect('http://127.0.0.1:8000/landingPage/')
 
         # Sign Up #
@@ -45,6 +49,6 @@ def index(request):
                 login(request, user)
                 messages.success(request, f'Cuenta creada con éxito! {user}')
                 return redirect('http://127.0.0.1:8000/index/')
-    return render(request, 'index.html', context={"upform": SignUpForm(), "inform": SignInForm()})
+    return render(request, 'index.html', context={"up_form": SignUpForm(), "in_form": SignInForm()})
 
 

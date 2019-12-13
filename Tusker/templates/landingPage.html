@@ -27,25 +27,17 @@
 </head>
 
 <body>
-
 <!-- BOOTSTRAP JS, DO NOT DELETE -->
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-        crossorigin="anonymous"></script>
-<script src="{% static 'prueba/js/bootstrap.min.js' %}"></script>
-
 <div class="wrapper">
+    {% csrf_token %}
     <!--SIDEBAR-->
     <nav id="sidebar">
-        <div class="sidebar-header text-center py-5">
-            <h1>LOGO</h1>
+        <div class="sidebar-header text-center py-3">
+            <img src="{% static 'prueba/img/logo.png' %}" class="img-fluid" style="width: 70%">
         </div>
         <div class="text-center py-3">
             <img src="{% static 'prueba/img/turing.jpg' %}" class="avatar px-2 py-2">
-            <p class="h6">Bienvenido, <br> Nombre de usuario</p>
+            <p class="h6">Bienvenido, <br> {{ user_name }}</p>
         </div>
         <ul class="list-unstyled components text-left">
             <li>
@@ -74,11 +66,22 @@
         </ul>
 
         <ul class="list-unstyled text-center py-4">
-            <button type="button" class="btn btn-danger">Cerrar Sesión</button>
+            <a type="button" class="btn btn-danger"  href="{% url 'logout.html' %}">Cerrar Sesión</a>
         </ul>
     </nav>
     <!--EL RESTO-->
     <div class="container-fluid text-center p-4 main">
+        <!-- If there are messages-->
+        <div class="row">
+            {% for message in messages %}
+                    <div class="alert alert-success">
+                        <a class="close" href="#" data-dismiss="alert">×</a>
+
+                        {{ message }}
+                    </div>
+            {% endfor %}
+        </div>
+        <!-- Mensaje y Boton Superior-->
         <div class="row p-2 mx-2 rounded shadow table-success">
             <div class="col-9 text-left">
                 <h2 class="pt-2">Horario de actividades</h2>
@@ -102,6 +105,7 @@
                 </div>
             </div>
         </div>
+
         <div class="row pt-4">
             <div class="col-2">
                 <button type="button" class="btn btn-sm btn-success"> << Mes</button>
@@ -669,5 +673,12 @@
     </div>
 </div>
 </body>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="{% static 'prueba/js/bootstrap.min.js' %}"></script>
 
 </html>
