@@ -9,7 +9,10 @@ def logout_view(request):
     return render(request, 'logout.html')
 
 def user_profile(request):
-    return render(request, 'userProfile.html')
+    return render(request, 'userProfile.html',
+                  context={"user_name":request.user.first_name,
+                           "user_last_name": request.user.last_name,
+                           "user_email": request.user.email})
 
 
 def landing_page(request):
