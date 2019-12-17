@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User
 from django import forms
+from .models import UserProfile
 
 
 class SignInForm(forms.ModelForm):
@@ -19,7 +20,7 @@ class SignUpForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput())
 
     class Meta:
-        model = User
+        model = UserProfile
         fields = ('first_name', 'last_name', 'username', 'password','profile_picture')
 
     def save(self, commit=True):
