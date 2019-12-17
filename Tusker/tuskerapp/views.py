@@ -2,6 +2,7 @@ from django.contrib.auth import login, authenticate, logout
 from django.shortcuts import render, redirect
 from .forms import SignUpForm, SignInForm
 from django.contrib import messages
+from .models import UserProfile
 
 
 def logout_view(request):
@@ -9,11 +10,15 @@ def logout_view(request):
     return render(request, 'logout.html')
 
 def user_profile(request):
-    return render(request, 'userProfile.html')
+    return render(request, 'userProfile.html',
+                  context={"user_name":request.UserProfile.first_name,
+                           "user_last_name": request.UserProfile.last_name,
+                           "user_email": request.UserProfile.email,
+                           "user_profile_picture": request.UserProfile.profile_picture})
 
 
 def landing_page(request):
-    return render(request, 'landingPage.html', context={"user_name": request.user.first_name})
+    return render(request, 'landingPage.html', context={"user_name": request.UserProfile.first_name})
 
 
 def index(request):
@@ -21,7 +26,7 @@ def index(request):
 
         # Sign In #
         if request.POST.get('submit') == 'sign_in':
-            form = SignInForm(request.POST)
+            form = SignInForm(request.POST, request.FILES)
             if form.is_valid():
                 email = form.cleaned_data.get('email')
                 raw_password = form.cleaned_data.get('password')

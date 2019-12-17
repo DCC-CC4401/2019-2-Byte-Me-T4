@@ -21,12 +21,12 @@
             <h1>LOGO</h1>
         </div>
         <div class="text-center py-3">
-            <img src="{%  static "/prueba/img/turing.jpg" %}" class="avatar px-2 py-2">
-            <p class="h6">Bienvenido, <br> Nombre de usuario</p>
+            <img src="{%  static '/prueba/img/turing.jpg' %}" class="avatar px-2 py-2">
+            <p class="h6">Bienvenido, <br> {{ user_name|title }}</p>
         </div>
         <ul class="list-unstyled components text-left">
             <li>
-                <a href="{% url 'landingPage' %}">Inicio</a>
+                <a href="{% url 'landingPage.html' %}">Inicio</a>
             </li>
             <li>
                 <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Perfil</a>
@@ -107,7 +107,7 @@
                             <div class="form-group">
                                 <label for="disabledTextInput">Nombre:</label>
                                 <input type="text" id="disabledTextInputNombre" class="form-control"
-                                       placeholder="Nombre usuario">
+                                       placeholder={{ user_name|title }}>
                             </div>
                         </fieldset>
 
@@ -116,7 +116,7 @@
                             <div class="form-group">
                                 <label for="disabledTextInput">Apellidos:</label>
                                 <input type="text" id="disabledTextInputApellidos" class="form-control"
-                                       placeholder="Apellidos usuario">
+                                       placeholder={{ user_last_name|title }}>
                             </div>
                         </fieldset>
 
@@ -125,16 +125,7 @@
                             <div class="form-group">
                                 <label for="disabledTextInput">Correo electronico:</label>
                                 <input type="text" id="disabledTextInput" class="form-control"
-                                       placeholder="correo@usuario.com">
-                            </div>
-                        </fieldset>
-
-                        <!--Fecha de nacimiento -->
-                        <fieldset disabled>
-                            <div class="form-group">
-                                <label for="disabledTextInput">Fecha de Nacimiento:</label>
-                                <input type="text" id="disabledTextInputFechaNacimiento" class="form-control"
-                                       placeholder="dd/mm/yyyy">
+                                       placeholder= {{ user_email }}>
                             </div>
                         </fieldset>
                     </form>
