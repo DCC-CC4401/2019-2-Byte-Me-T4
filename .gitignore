@@ -124,6 +124,6 @@ fabric.properties
 #Logs
 *.log
 
-# __pycache__
+# __pycache__ to git ignore
 Tusker/tuskerapp/__pycache__
 # End of https://www.gitignore.io/api/pycharm
