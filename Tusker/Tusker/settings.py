@@ -125,3 +125,4 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 STATIC_ROOT = os.path.join(BASE_DIR, 'tuskerapp/static')
 
 AUTHENTICATION_BACKENDS = ( 'django.contrib.auth.backends.ModelBackend',)
+AUTH_PROFILE_MODULE = 'tuskerapp.UserProfile'

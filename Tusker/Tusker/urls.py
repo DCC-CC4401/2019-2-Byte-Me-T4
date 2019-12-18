@@ -18,15 +18,18 @@ from django.contrib import admin
 from django.urls import path, include
 
 from Tusker import settings
-from tuskerapp import views
+from tuskerapp import views as app_views
+from django.views.generic import TemplateView
+
 
 urlpatterns = [
     path('admin/', admin.site.urls, name="admin"),
     path('accounts/', include('django.contrib.auth.urls')),
-    path('prueba/', views.user_profile, name="prueba"),
-    path('landingPage/', views.landing_page, name="landingPage.html"),
-    path('index/', views.index, name="index.html"),
-    path('logout', views.logout_view, name= 'logout.html')
+    path('prueba/', app_views.user_profile, name="prueba"),
+    path('landingPage/', app_views.landing_page, name="landingPage.html"),
+    path('index/', app_views.index, name="index.html"),
+    path('logout', app_views.logout_view, name= 'logout.html'),
+
 ]
 
 # urlpatterns += staticfiles_urlpatterns()

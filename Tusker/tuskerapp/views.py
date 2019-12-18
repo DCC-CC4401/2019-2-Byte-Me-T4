@@ -1,8 +1,9 @@
 from django.contrib.auth import login, authenticate, logout
 from django.shortcuts import render, redirect
-from .forms import SignUpForm, SignInForm
+
+from tuskerapp.models import UserProfile
+from .forms import SignUpForm, SignInForm, UserProfileForm
 from django.contrib import messages
-from .models import UserProfile
 
 
 def logout_view(request):
@@ -10,15 +11,20 @@ def logout_view(request):
     return render(request, 'logout.html')
 
 def user_profile(request):
+    user = request.user
+    avatar = UserProfile.objects.get(user=user).profile_picture
     return render(request, 'userProfile.html',
-                  context={"user_name":request.UserProfile.first_name,
-                           "user_last_name": request.UserProfile.last_name,
-                           "user_email": request.UserProfile.email,
-                           "user_profile_picture": request.UserProfile.profile_picture})
+                  context={"user_name":user.first_name,
+                           "user_last_name": user.last_name,
+                           "user_email": user.email,
+                           "avatar": avatar})
 
 
 def landing_page(request):
-    return render(request, 'landingPage.html', context={"user_name": request.UserProfile.first_name})
+    user = request.user
+    avatar = UserProfile.objects.get(user=user).profile_picture
+    return render(request, 'landingPage.html', context={"user_name": user.first_name,
+                                                        "avatar": avatar})
 
 
 def index(request):
@@ -43,17 +49,26 @@ def index(request):
 
         # Sign Up #
         elif request.POST.get('submit') == 'sign_up':
-            form = SignUpForm(request.POST)
+            form = SignUpForm(request.POST, request.FILES)
+            #print("recibe Sign Up", form.errors)
+            #print("FILES", request.FILES)
             if form.is_valid():
+                print("From is Valid")
                 user = form.save()
                 email = form.cleaned_data.get('email')
                 password = form.cleaned_data['password']
                 #  Use set_password here
                 user.set_password(password)
                 user.save()
-                login(request, user)
+                image = UserProfile(user=user, profile_picture=request.FILES['profile_picture'])
+                image.save()
+                #print("email " + str(email) + "pass " + str(password))
+                #print(login(request, user))
                 messages.success(request, f'Cuenta creada con éxito! {user}')
                 return redirect('http://127.0.0.1:8000/index/')
-    return render(request, 'index.html', context={"up_form": SignUpForm(), "in_form": SignInForm()})
+            else:
+                messages.error(request, form.errors)
+    return render(request, 'index.html', context={"up_form": SignUpForm(), "in_form": SignInForm(),
+                                                  "image_form": UserProfileForm()})
 
 

@@ -13,10 +13,11 @@
 <h2>Tusker</h2>
 <div class="container" id="container">
 	<div class="form-container sign-up-container">
-		<form method="POST">
+		<form method="POST"  enctype="multipart/form-data">
             {% csrf_token %}
 			<h1>Crear Cuenta</h1>
             {{ up_form }}
+            {{ image_form }}
 			<button type="submit" name='submit' value='sign_up'>Crear cuenta</button>
 		</form>
 	</div>

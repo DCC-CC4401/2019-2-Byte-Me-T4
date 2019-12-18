@@ -24,9 +24,15 @@ class Relations(models.Model):
     user_2 = models.ForeignKey(User, models.CASCADE, related_name="user2")
     status = models.IntegerField()
 
+
 class UserProfile(models.Model):
-    user = OneToOneField(User)
+    user = OneToOneField(User, on_delete=models.CASCADE)
     profile_picture = models.ImageField(upload_to='profile_images', blank=True)
 
     def __unicode__(self):
         return self.user.username
+
+    def create_profile(sender, **kwargs):
+        if kwargs['created']:
+            user_profile = UserProfile.objects.create(user=kwargs['instance'])
+
