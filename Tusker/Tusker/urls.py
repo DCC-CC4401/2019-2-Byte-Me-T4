@@ -28,7 +28,8 @@ urlpatterns = [
     path('prueba/', app_views.user_profile, name="prueba"),
     path('landingPage/', app_views.landing_page, name="landingPage.html"),
     path('index/', app_views.index, name="index.html"),
-    path('logout', app_views.logout_view, name= 'logout.html'),
+    path('logout', app_views.logout_view, name='logout.html'),
+    path('changePassword/', app_views.change_password, name='changePassword.html'),
 
 ]
 

@@ -1,14 +1,14 @@
 from django.contrib.auth import login, authenticate, logout
 from django.shortcuts import render, redirect
-
 from tuskerapp.models import UserProfile
 from .forms import SignUpForm, SignInForm, UserProfileForm
 from django.contrib import messages
-
+from django.contrib.auth.forms import PasswordChangeForm
 
 def logout_view(request):
     logout(request)
     return render(request, 'logout.html')
+
 
 def user_profile(request):
     user = request.user
@@ -22,10 +22,13 @@ def user_profile(request):
 
 def landing_page(request):
     user = request.user
-    avatar = UserProfile.objects.get(user=user).profile_picture
-    return render(request, 'landingPage.html', context={"user_name": user.first_name,
+    if request.user.is_authenticated:
+        avatar = UserProfile.objects.get(user=user).profile_picture
+        return render(request, 'landingPage.html', context={"user_name": user.first_name,
                                                         "avatar": avatar})
-
+    else:
+        messages.error(request, "Something is wrong with your credentials")
+        return render(request, 'index.html')
 
 def index(request):
     if request.method == "POST":
@@ -72,3 +75,42 @@ def index(request):
                                                   "image_form": UserProfileForm()})
 
 
+def change_password(request):
+    # Validation
+    if request.method == "POST":
+        form = PasswordChangeForm(data=request.POST, user=request.user)
+        if form.is_valid():
+            form.save()
+            user = request.user.username
+            password = form.cleaned_data['new_password1']
+            user = authenticate(username=user, password=password)
+            if user is None:
+                messages.error(request, form.errors)
+                return redirect('http://127.0.0.1:8000/index/')
+            else:
+                login(user,password)
+                return redirect('http://127.0.0.1:8000/landingPage/')
+    # Show Form
+    return render(request, 'changePassword.html',
+                  context={"password_form": PasswordChangeForm(user=request.user)})
+
+# def change_profile(request):
+#     user = request.user
+#     avatar = UserProfile.objects.get(user=user).profile_picture
+#     current_password = user.password
+#
+#     # Validation
+#     if request.method == "POST":
+#         form = EditUserForm(request.POST, request.FILES)
+#         if form.is_valid():
+#             new_password = form.cleaned_data['password']
+#             # If passwords are equal prompt an error
+#         else:
+#             messages.error(request, form.errors)
+#     # Show Form
+#     return render(request, 'editUser.html', context={"edit_form": EditUserForm(),
+#                                                      "image_form": EditUserProfileForm(),
+#                                                      "user_name": user.first_name,
+#                                                      "user_last_name": user.last_name,
+#                                                      "user_email": user.email,
+#                                                      "avatar": avatar, })
