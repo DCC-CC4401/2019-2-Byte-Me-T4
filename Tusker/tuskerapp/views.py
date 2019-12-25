@@ -81,14 +81,14 @@ def change_password(request):
         form = PasswordChangeForm(data=request.POST, user=request.user)
         if form.is_valid():
             form.save()
-            user = request.user.username
+            username = request.user.username
             password = form.cleaned_data['new_password1']
-            user = authenticate(username=user, password=password)
+            user = authenticate(username=username, password=password)
             if user is None:
                 messages.error(request, form.errors)
                 return redirect('http://127.0.0.1:8000/index/')
             else:
-                login(user,password)
+                login(request, user)
                 return redirect('http://127.0.0.1:8000/landingPage/')
     # Show Form
     return render(request, 'changePassword.html',
