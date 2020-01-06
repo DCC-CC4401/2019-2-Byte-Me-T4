@@ -25,12 +25,12 @@ from django.views.generic import TemplateView
 urlpatterns = [
     path('admin/', admin.site.urls, name="admin"),
     path('accounts/', include('django.contrib.auth.urls')),
-    path('prueba/', app_views.user_profile, name="prueba"),
+    path('profile/', app_views.user_profile, name="profile"),
     path('landingPage/', app_views.landing_page, name="landingPage.html"),
     path('index/', app_views.index, name="index.html"),
     path('logout', app_views.logout_view, name='logout.html'),
     path('changePassword/', app_views.change_password, name='changePassword.html'),
-
+    path('changeProfilePicture/', app_views.update_user, name='changeProfilePicture.html'),
 ]
 
 # urlpatterns += staticfiles_urlpatterns()
