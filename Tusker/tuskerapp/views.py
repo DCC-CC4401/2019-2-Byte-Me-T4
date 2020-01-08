@@ -79,7 +79,7 @@ def change_password(request):
                 messages.error(request, form.errors)
                 return redirect('/index/')
             else:
-                login(user,password)
+                login(request, user)
                 return redirect('/landingPage/')
     return render(request, 'changePassword.html',
                   context={"password_form": PasswordChangeForm(user=request.user)})
