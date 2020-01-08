@@ -46,12 +46,11 @@ def index(request):
                 else:
                     login(request, user)
                     messages.success(request, f'Inicio de Sesión Exitoso para {email}!')
-                    return redirect('http://127.0.0.1:8000/landingPage/')
+                    return redirect('/landingPage/')
 
         elif request.POST.get('submit') == 'sign_up':
             form = SignUpForm(request.POST, request.FILES)
             if form.is_valid():
-                print("From is Valid")
                 user = form.save()
                 email = form.cleaned_data.get('email')
                 password = form.cleaned_data['password']
@@ -61,7 +60,7 @@ def index(request):
                 image = UserProfile(user=user, picture=request.FILES['picture'])
                 image.save()
                 messages.success(request, f'Cuenta creada con éxito! {user}')
-                return redirect('http://127.0.0.1:8000/index/')
+                return redirect('/index/')
             else:
                 messages.error(request, form.errors)
     return render(request, 'index.html', context={"up_form": SignUpForm(), "in_form": SignInForm(),
@@ -78,10 +77,10 @@ def change_password(request):
             user = authenticate(username=user, password=password)
             if user is None:
                 messages.error(request, form.errors)
-                return redirect('http://127.0.0.1:8000/index/')
+                return redirect('/index/')
             else:
                 login(user,password)
-                return redirect('http://127.0.0.1:8000/landingPage/')
+                return redirect('/landingPage/')
     return render(request, 'changePassword.html',
                   context={"password_form": PasswordChangeForm(user=request.user)})
 
@@ -97,7 +96,7 @@ def update_user(request):
             if 'picture' in request.FILES:
                 profile.picture = request.FILES['picture']
             profile.save()
-            return redirect('http://127.0.0.1:8000/profile/')
+            return redirect('/profile/')
         else:
             print(update_profile_form.errors, file=sys.stderr)
     else:
