@@ -80,6 +80,7 @@ def change_password(request):
                 return redirect('/index/')
             else:
                 login(request, user)
+                messages.success(request, f'Contraseña cambiada con éxito!')
                 return redirect('/landingPage/')
     return render(request, 'changePassword.html',
                   context={"password_form": PasswordChangeForm(user=request.user)})
@@ -106,7 +107,7 @@ def update_user(request):
         if request.user.is_authenticated:
             avatar = UserProfile.objects.get(user=user).picture
         else:
-            messages.error(request, "Something is wrong with your credentials")
+            messages.error(request, "Hay algo malo con tus credenciales")
             return render(request, 'index.html')
     return render(request, 'changeProfilePicture.html', {"update_profile_form": update_profile_form,
                                                          "avatar": avatar, "root": base_dir})
