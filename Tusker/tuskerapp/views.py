@@ -86,7 +86,9 @@ def change_password(request):
 
 
 def update_user(request):
-    user_profile2 = UserProfile.objects.get(user=request.user)
+    base_dir = "media/profile_images/"
+    user = request.user
+    user_profile2 = UserProfile.objects.get(user=user)
     if request.method == "POST":
         print("its a POST request :)", file=sys.stderr)
         update_profile_form = UserProfileForm(data=request.POST, instance=user_profile2)
@@ -100,5 +102,11 @@ def update_user(request):
         else:
             print(update_profile_form.errors, file=sys.stderr)
     else:
-        update_profile_form = UserProfileForm(instance=user_profile2)
-    return render(request, 'changeProfilePicture.html', {'update_profile_form': update_profile_form})
+        update_profile_form = UserProfileForm()
+        if request.user.is_authenticated:
+            avatar = UserProfile.objects.get(user=user).picture
+        else:
+            messages.error(request, "Something is wrong with your credentials")
+            return render(request, 'index.html')
+    return render(request, 'changeProfilePicture.html', {"update_profile_form": update_profile_form,
+                                                         "avatar": avatar, "root": base_dir})

@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, include, re_path
 
 from Tusker import settings
 from tuskerapp import views as app_views
@@ -31,9 +31,13 @@ urlpatterns = [
     path('logout', app_views.logout_view, name='logout.html'),
     path('changePassword/', app_views.change_password, name='changePassword.html'),
     path('changeProfilePicture/', app_views.update_user, name='changeProfilePicture.html'),
+    #re_path(r'^mah_root/$', 'tuskerapp.views.mah_view', name='mah_view'),
 ]
 
 # urlpatterns += staticfiles_urlpatterns()
+
+
+
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
