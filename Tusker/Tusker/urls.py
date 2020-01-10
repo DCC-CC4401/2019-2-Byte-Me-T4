@@ -31,7 +31,6 @@ urlpatterns = [
     path('logout', app_views.logout_view, name='logout.html'),
     path('changePassword/', app_views.change_password, name='changePassword.html'),
     path('changeProfilePicture/', app_views.update_user, name='changeProfilePicture.html'),
-    #re_path(r'^mah_root/$', 'tuskerapp.views.mah_view', name='mah_view'),
 ]
 
 # urlpatterns += staticfiles_urlpatterns()
