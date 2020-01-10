@@ -27,7 +27,7 @@ class Relations(models.Model):
 
 class UserProfile(models.Model):
     user = OneToOneField(User, on_delete=models.CASCADE)
-    picture = models.ImageField(upload_to='profile_images', blank=True)
+    profile_picture = models.ImageField(upload_to='profile_images', blank=True)
 
     def __unicode__(self):
         return self.user.username

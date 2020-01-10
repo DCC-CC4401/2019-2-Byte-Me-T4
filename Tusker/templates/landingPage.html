@@ -7,9 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Tusker</title>
     <!-- BOOTSTRAP CSS, DO NOT DELETE -->
-    <link rel="stylesheet" href="{% static '/profile/css/bootstrap.min.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static '/profile/css/custom.css' %}">
-    <script src="{% static 'profile/js/clock.js' %}"></script>
+    <link rel="stylesheet" href="{% static '/prueba/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static '/prueba/css/custom.css' %}">
+    <script src="{% static 'prueba/js/clock.js' %}"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 
     <script type="text/javascript">
@@ -33,7 +33,7 @@
     <!--SIDEBAR-->
     <nav id="sidebar">
         <div class="sidebar-header text-center py-3">
-            <img src="{% static 'profile/img/logo.png' %}" class="img-fluid" style="width: 70%">
+            <img src="{% static 'prueba/img/logo.png' %}" class="img-fluid" style="width: 70%">
         </div>
         <div class="text-center py-3">
             <img src="../media/{{ avatar }}" class="avatar px-2 py-2">
@@ -43,9 +43,26 @@
             <li>
                 <a href="#">Inicio</a>
             </li>
+            <li>
+                <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Perfil</a>
+                <ul class="collapse list-unstyled text-left" id="pageSubmenu">
                     <li>
-                        <a href="{%  url 'profile' %}">Mi Perfil</a>
+                        <a href="{%  url 'prueba' %}">Mi Perfil</a>
                     </li>
+                    <li>
+                        <a href="#">Seguridad</a>
+                    </li>
+                    <li>
+                        <a href="#">Amigos</a>
+                    </li>
+                    <li>
+                        <a href="#">Mis Actividades</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">Otra cosa</a>
+            </li>
         </ul>
 
         <ul class="list-unstyled text-center py-4">
@@ -662,6 +679,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
         integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
         crossorigin="anonymous"></script>
-<script src="{% static 'profile/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'prueba/js/bootstrap.min.js' %}"></script>
 
 </html>
