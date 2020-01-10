@@ -51,16 +51,19 @@ def index(request):
         elif request.POST.get('submit') == 'sign_up':
             form = SignUpForm(request.POST, request.FILES)
             if form.is_valid():
-                user = form.save()
-                email = form.cleaned_data.get('email')
-                password = form.cleaned_data['password']
-
-                user.set_password(password)
-                user.save()
-                image = UserProfile(user=user, picture=request.FILES['picture'])
-                image.save()
-                messages.success(request, f'Cuenta creada con éxito! {user}')
-                return redirect('/index/')
+                print(len(request.FILES))
+                if(len(request.FILES) == 0):
+                    messages.error(request, 'Error: No se seleccionó ninguna imagen de perfil')
+                else:
+                    user = form.save()
+                    email = form.cleaned_data.get('email')
+                    password = form.cleaned_data['password']
+                    user.set_password(password)
+                    user.save()
+                    image = UserProfile(user=user, picture=request.FILES['picture'])
+                    image.save()
+                    messages.success(request, f'Cuenta creada con éxito! {user}')
+                    return redirect('/index/')
             else:
                 messages.error(request, form.errors)
     return render(request, 'index.html', context={"up_form": SignUpForm(), "in_form": SignInForm(),

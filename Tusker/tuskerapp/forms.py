@@ -31,6 +31,7 @@ class SignUpForm(forms.ModelForm):
 
 
 class UserProfileForm(forms.ModelForm):
+    picture = forms.FileField(required=True, label="Imagen de Perfil")
     class Meta:
         model = UserProfile
         fields = ('picture',)
